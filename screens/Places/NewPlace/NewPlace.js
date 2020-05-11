@@ -8,14 +8,20 @@ import {
     ScrollView,
     Button
 } from 'react-native';
+// Redux
+import { useDispatch } from 'react-redux';
 
 // Constants
 import Colors from '../../../constants/styles/Colors';
-
+// Actions
+import { addPlace } from '../../../store/actions/places';
+// Components
+import ImagePicker from '../../../components/ImagePicker/ImagePicker';
 
 // Component
-const NewPlace = () => {
+const NewPlace = ({ navigation }) => {
     const [title, setTitle] = useState('');
+    const dispatch = useDispatch();
 
     const titleChangeHandler = text => {
         // Logic to validate
@@ -23,7 +29,8 @@ const NewPlace = () => {
     };
 
     const savePlace = () => {
-
+        dispatch(addPlace(title));
+        navigation.goBack();
     };
 
     return (
@@ -35,6 +42,7 @@ const NewPlace = () => {
                     value={title}
                     onChangeText={titleChangeHandler}
                 />
+                <ImagePicker />
                 <Button
                     title="Save Place"
                     color={Colors.primary}
