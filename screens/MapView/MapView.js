@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 // Component
-const Map = () => {
+const MapView = () => {
     return (
         <View>
             
@@ -17,4 +17,4 @@ const Map = () => {
 // Styles
 const styles = StyleSheet.create({});
 
-export default Map;
+export default MapView;

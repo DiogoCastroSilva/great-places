@@ -14,6 +14,11 @@ const NewPlace = () => {
     );
 };
 
+// Navigation Options
+NewPlace.navigationOptions = {
+    headerTitle: 'Add Place'
+};
+
 // Styles
 const styles = StyleSheet.create({});
 
