@@ -16,7 +16,7 @@ import * as Permissions from 'expo-permissions';
 import Colors from '../../constants/styles/Colors';
 
 // Component
-const ImagePicker = () => {
+const ImagePicker = ({ getImage }) => {
     const [pickedImage, setPickedImage] = useState();
 
     const verifyPermissions = async () => {
@@ -42,6 +42,7 @@ const ImagePicker = () => {
             quality: 0.5
         });
         setPickedImage(image.uri);
+        getImage(image.uri);
     };
 
     return (

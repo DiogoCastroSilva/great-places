@@ -3,6 +3,7 @@ import React from 'react';
 import {
     StyleSheet,
     View,
+    Text,
     TouchableOpacity,
     Image
 } from 'react-native';
@@ -12,7 +13,10 @@ import Colors from '../../constants/styles/Colors';
 const PlaceItem = ({ image, title, address, onSelect }) => {
     return (
         <TouchableOpacity onPress={onSelect} style={styles.container}>
-            <Image source={{ uri: image}} />
+            <Image
+                source={{ uri: image }}
+                style={styles.image}
+            />
             <View style={styles.detailsContainer}>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.address}>{address}</Text>
@@ -35,7 +39,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderRadius: 35,
-        color: 'blue',
+        backgroundColor: '#ccc',
         borderColor: Colors.primary,
         borderWidth: 1
     },

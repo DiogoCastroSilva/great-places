@@ -2,7 +2,7 @@
 import React from 'react';
 import {
     StyleSheet,
-    View,
+    FlatList,
     Platform,
 } from 'react-native';
 // Redux
@@ -12,20 +12,20 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 // Components
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton/CustomHeaderButton';
-import { FlatList } from 'react-native-gesture-handler';
 import PlaceItem from '../../components/PlaceItem/PlaceItem';
 
 
 // Component
 const Places = ({ navigation }) => {
     const places = useSelector(state => state.places.places);
+    console.log(places);
     return (
         <FlatList
             data={places}
             keyExtractor={item => item.id}
             renderItem={itemData => (
                 <PlaceItem
-                    image={null}
+                    image={itemData.item.image}
                     title={itemData.item.title}
                     address={null}
                     onSelect={() => navigation.navigate('PlaceDetail', {

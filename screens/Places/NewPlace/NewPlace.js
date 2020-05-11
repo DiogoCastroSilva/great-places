@@ -21,6 +21,8 @@ import ImagePicker from '../../../components/ImagePicker/ImagePicker';
 // Component
 const NewPlace = ({ navigation }) => {
     const [title, setTitle] = useState('');
+    const [selectedImage, setSelectedImage] = useState();
+
     const dispatch = useDispatch();
 
     const titleChangeHandler = text => {
@@ -29,8 +31,12 @@ const NewPlace = ({ navigation }) => {
     };
 
     const savePlace = () => {
-        dispatch(addPlace(title));
+        dispatch(addPlace(title, selectedImage));
         navigation.goBack();
+    };
+
+    const imageSelectedHandler = imagePath => {
+        setSelectedImage(imagePath);
     };
 
     return (
@@ -42,7 +48,9 @@ const NewPlace = ({ navigation }) => {
                     value={title}
                     onChangeText={titleChangeHandler}
                 />
-                <ImagePicker />
+                <ImagePicker
+                    getImage={imageSelectedHandler}
+                />
                 <Button
                     title="Save Place"
                     color={Colors.primary}
