@@ -22,12 +22,13 @@ export const addPlace = (title, image) => {
                 15.6,
                 12.3
             );
+            console.log(dbResult);
             dispatch({
                 type: ADD_PLACE,
                 place: {
                     id: dbResult.insertId,
                     title,
-                    newPath
+                    image: newPath
                 }
             });
         } catch(e) {

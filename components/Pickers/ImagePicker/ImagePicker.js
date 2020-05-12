@@ -13,7 +13,9 @@ import * as ImgPicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
 // Constants
-import Colors from '../../constants/styles/Colors';
+import Colors from '../../../constants/styles/Colors';
+
+// Constants
 
 // Component
 const ImagePicker = ({ getImage }) => {
@@ -22,7 +24,7 @@ const ImagePicker = ({ getImage }) => {
     const verifyPermissions = async () => {
         const permission = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
         if (permission.status !== 'granted') {
-            Alert.alert("Insufficientpermissions!",
+            Alert.alert("Insufficient permissions!",
                 "You need to grant camera permissions to use this app.",
                 [{ text: "Close" }]
             );

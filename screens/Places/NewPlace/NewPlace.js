@@ -16,7 +16,8 @@ import Colors from '../../../constants/styles/Colors';
 // Actions
 import { addPlace } from '../../../store/actions/places';
 // Components
-import ImagePicker from '../../../components/ImagePicker/ImagePicker';
+import ImagePicker from '../../../components/Pickers/ImagePicker/ImagePicker';
+import LocationPicker from '../../../components/Pickers/LocationPicker/LocationPicker';
 
 // Component
 const NewPlace = ({ navigation }) => {
@@ -50,6 +51,8 @@ const NewPlace = ({ navigation }) => {
                 />
                 <ImagePicker
                     getImage={imageSelectedHandler}
+                />
+                <LocationPicker
                 />
                 <Button
                     title="Save Place"

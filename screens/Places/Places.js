@@ -7,13 +7,13 @@ import {
 } from 'react-native';
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
+import { getPlaces } from '../../store/actions/places';
 // Navigation
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 // Components
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton/CustomHeaderButton';
 import PlaceItem from '../../components/PlaceItem/PlaceItem';
-import { fetchPlaces } from '../../helpers/db';
 
 
 // Component
@@ -23,7 +23,7 @@ const Places = ({ navigation }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchPlaces());
+        dispatch(getPlaces());
     }, [dispatch]);
 
     return (
