@@ -9,7 +9,17 @@ import ReduxThunk from 'redux-thunk';
 import PlacesReducer from './store/reducers/places';
 // Navigation
 import PlacesNavigator from './navigation/PlacesNavigator';
+// HELPERS
+import { init } from './helpers/db';
 
+// DB
+init()
+  .then(() => {
+    console.log('DB Initialize');
+  })
+  .catch(err => {
+    console.log('Err initializing db', err);
+  });
 
 // Redux Config
 const rootReducer = combineReducers({

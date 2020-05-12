@@ -18,7 +18,6 @@ import PlaceItem from '../../components/PlaceItem/PlaceItem';
 // Component
 const Places = ({ navigation }) => {
     const places = useSelector(state => state.places.places);
-    console.log(places);
     return (
         <FlatList
             data={places}
