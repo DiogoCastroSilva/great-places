@@ -13,13 +13,7 @@ import PlacesNavigator from './navigation/PlacesNavigator';
 import { init } from './helpers/db';
 
 // DB
-init()
-  .then(() => {
-    console.log('DB Initialize');
-  })
-  .catch(err => {
-    console.log('Err initializing db', err);
-  });
+init();
 
 // Redux Config
 const rootReducer = combineReducers({
