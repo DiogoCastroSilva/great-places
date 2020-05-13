@@ -8,7 +8,7 @@ import { createAppContainer } from "react-navigation";
 import Places from "../screens/Places/Places";
 import PlaceDetail from "../screens/Places/PlaceDetail/PlaceDetail";
 import NewPlace from "../screens/Places/NewPlace/NewPlace";
-import MapView from "../screens/MapView/MapView";
+import Map from "../screens/Map/Map";
 // Constants
 import Colors from "../constants/styles/Colors";
 
@@ -19,7 +19,7 @@ const PlacesNavigator = createStackNavigator(
         Places: Places,
         PlaceDetail: PlaceDetail,
         NewPlace: NewPlace,
-        MapView: MapView
+        Map: Map
     },
     {
         defaultNavigationOptions: {

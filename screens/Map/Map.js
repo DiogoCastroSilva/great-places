@@ -4,17 +4,18 @@ import {
     StyleSheet,
     View,
 } from 'react-native';
+import MapView from 'react-native-maps';
 
 // Component
-const MapView = () => {
+const Map = () => {
     return (
-        <View>
-            
-        </View>
+        <MapView
+        
+        />
     );
 };
 
 // Styles
 const styles = StyleSheet.create({});
 
-export default MapView;
+export default Map;

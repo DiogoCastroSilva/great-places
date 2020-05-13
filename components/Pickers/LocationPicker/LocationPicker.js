@@ -14,6 +14,7 @@ import * as Permissions from 'expo-permissions';
 
 // Constants
 import Colors from '../../../constants/styles/Colors';
+import MapPreview from '../../MapPreview/MapPreview';
 
 // Component
 const LocationPicker = () => {
@@ -60,15 +61,18 @@ const LocationPicker = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.imagePreview}>
-                { isFetching
+            <MapPreview
+                style={styles.imagePreview}
+                location={selectedLocation}
+            >
+                {isFetching
                     ? <ActivityIndicator
                         size="large"
                         color={Colors.primary}
                       />
                     : <Text>No location chosen yet!</Text>
                 }
-            </View>
+            </MapPreview>
             <Button
                 title="Get user location"
                 color={Colors.primary}
