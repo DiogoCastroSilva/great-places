@@ -30,15 +30,16 @@ const MapPreview = ({
     return (
         <TouchableOpacity style={{ ...style, ...styles.imagePreview}}>
             {location
-                ?
-                    (
-                        <MapView style={styles.mapImage} region={imagePreviewURL}>
-                            <Marker
-                                coordinate={{ latitude: location.lat, longitude: location.lng }}
-                            />
-                        </MapView>
-                    )
-                : children
+                ? (
+                    <MapView style={styles.mapImage} region={imagePreviewURL}>
+                        <Marker
+                            coordinate={{
+                                latitude: location.lat,
+                                longitude: location.lng
+                            }}
+                        />
+                    </MapView>
+                ) : children
             }
         </TouchableOpacity>
     );
