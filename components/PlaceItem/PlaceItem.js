@@ -7,6 +7,8 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native';
+
+// Constants
 import Colors from '../../constants/styles/Colors';
 
 // Component
@@ -19,7 +21,7 @@ const PlaceItem = ({ image, title, address, onSelect }) => {
             />
             <View style={styles.detailsContainer}>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.address}>{address}</Text>
+                <Text style={styles.address}>{address?.street}</Text>
             </View>
         </TouchableOpacity>
     );

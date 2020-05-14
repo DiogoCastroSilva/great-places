@@ -1,7 +1,7 @@
 // React
 import React from 'react';
 import {
-    Platform,
+    Platform
 } from 'react-native';
 // Expo
 import { Ionicons } from '@expo/vector-icons';

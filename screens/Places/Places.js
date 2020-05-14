@@ -19,7 +19,7 @@ import PlaceItem from '../../components/PlaceItem/PlaceItem';
 // Component
 const Places = ({ navigation }) => {
     const places = useSelector(state => state.places.places);
-
+    console.log(places);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -34,9 +34,9 @@ const Places = ({ navigation }) => {
                 <PlaceItem
                     image={itemData.item.image}
                     title={itemData.item.title}
-                    address={null}
+                    address={itemData.item.address}
                     onSelect={() => navigation.navigate('PlaceDetail', {
-                        id: itemData.id,
+                        id: itemData.item.id,
                         title: itemData.item.title
                     })}
                 />

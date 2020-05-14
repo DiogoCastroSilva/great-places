@@ -1,16 +1,30 @@
 import * as FileSystem from 'expo-file-system';
 import { insertPlace, fetchPlaces } from '../../helpers/db';
+import * as Location from 'expo-location';
 
 // Actions
 export const ADD_PLACE = 'ADD_PLACE';
 export const GET_PLACES = 'GET_PLACES';
 
-export const addPlace = (title, image) => {
+export const addPlace = (title, image, location) => {
     return async dispatch => {
+        const loc = {
+            latitude: location.lat,
+            longitude: location.lng
+        };
+
         const fileName = image.split('/').pop();
         const newPath = FileSystem.documentDirectory + fileName;
 
         try {
+
+            const response = await Location.reverseGeocodeAsync(loc);
+            if (!response || response.length === 0) {
+                throw new Error(`Something went wrong while fetching geolocation, ${response}`);
+            }
+
+            const address = await JSON.stringify(response[0]);
+
             await FileSystem.moveAsync({
                 from: image,
                 to: newPath
@@ -18,17 +32,19 @@ export const addPlace = (title, image) => {
             const dbResult = await insertPlace(
                 title,
                 newPath,
-                'Rua 5',
-                15.6,
-                12.3
+                address,
+                loc.latitude,
+                loc.longitude
             );
-            console.log(dbResult);
             dispatch({
                 type: ADD_PLACE,
                 place: {
                     id: dbResult.insertId,
                     title,
-                    image: newPath
+                    image: newPath,
+                    address: response[0],
+                    lat: loc.latitude,
+                    lng: loc.longitude
                 }
             });
         } catch(e) {
@@ -41,10 +57,11 @@ export const getPlaces = () => {
     return async dispatch => {
         try {
             const dbResult = await fetchPlaces();
-            console.log(dbResult);
+            const places = dbResult.rows._array.map(place => ({ ...place, address: JSON.parse(place.address) }));
+            console.log(dbResult.rows._array);
             dispatch({
                 type: GET_PLACES,
-                places: dbResult.rows._array
+                places: places
             });
         } catch (err) {
             throw new Error(err);

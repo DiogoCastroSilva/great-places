@@ -1,5 +1,5 @@
 // React
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     View,
@@ -17,9 +17,27 @@ import Colors from '../../../constants/styles/Colors';
 import MapPreview from '../../MapPreview/MapPreview';
 
 // Component
-const LocationPicker = () => {
+const LocationPicker = ({
+    navigation,
+    onLocationPicked
+}) => {
     const [selectedLocation, setSelectedLocation] = useState();
     const [isFetching, setIsFetching] = useState(false);
+
+    const manualSelectedLocation = navigation.getParam('selectedLocation');
+
+    useEffect(() => {
+        if (manualSelectedLocation) {
+            setSelectedLocation({
+                lat: manualSelectedLocation.latitude,
+                lng: manualSelectedLocation.longitude
+            });
+            onLocationPicked({
+                lat: manualSelectedLocation.latitude,
+                lng: manualSelectedLocation.longitude
+            });
+        }
+    }, [manualSelectedLocation, onLocationPicked, setSelectedLocation])
 
     const verifyPermissions = async () => {
         const permission = await Permissions.askAsync(Permissions.LOCATION);
@@ -48,6 +66,10 @@ const LocationPicker = () => {
                 lat: location.coords.latitude,
                 lng: location.coords.longitude
             });
+            onLocationPicked({
+                lat: location.coords.latitude,
+                lng: location.coords.longitude
+            });
         } catch(e) {
             Alert.alert(
                 'Could not find location',
@@ -59,11 +81,16 @@ const LocationPicker = () => {
         
     };
 
+    const previewPressHandler = () => {
+        navigation.navigate('Map');
+    };
+
     return (
         <View style={styles.container}>
             <MapPreview
                 style={styles.imagePreview}
                 location={selectedLocation}
+                onPreviewPress={previewPressHandler}
             >
                 {isFetching
                     ? <ActivityIndicator

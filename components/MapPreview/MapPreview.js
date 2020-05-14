@@ -2,21 +2,20 @@
 import React from 'react';
 import {
     StyleSheet,
-    View,
+    TouchableOpacity
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import MapView, { Marker } from 'react-native-maps';
 
 // Component
 const MapPreview = ({
     style,
     location,
-    children
+    children,
+    onPreviewPress
 }) => {
 
     let imagePreviewURL
     if (location) {
-        console.log('location', location);
         // imagePreviewURL = `https://maps.googleapis.com/maps/api/staticmap?center=${location.lat},${location.lng}&zoom=15&size=400x200&maptype=roadmap&markers=color:red%7Clabel:C%7C${location.lat},${location.lng}&key=${ENV.googleAPIKey}`;
         imagePreviewURL = {
             latitude: location.lat,
@@ -28,7 +27,10 @@ const MapPreview = ({
     }
 
     return (
-        <TouchableOpacity style={{ ...style, ...styles.imagePreview}}>
+        <TouchableOpacity
+            style={{ ...style, ...styles.imagePreview}}
+            onPress={onPreviewPress}
+        >
             {location
                 ? (
                     <MapView style={styles.mapImage} region={imagePreviewURL}>

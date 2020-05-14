@@ -1,5 +1,5 @@
 // React
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
     StyleSheet,
     View,
@@ -23,6 +23,7 @@ import LocationPicker from '../../../components/Pickers/LocationPicker/LocationP
 const NewPlace = ({ navigation }) => {
     const [title, setTitle] = useState('');
     const [selectedImage, setSelectedImage] = useState();
+    const [selectedLocation, setSelectedLocation] = useState();
 
     const dispatch = useDispatch();
 
@@ -32,13 +33,17 @@ const NewPlace = ({ navigation }) => {
     };
 
     const savePlace = () => {
-        dispatch(addPlace(title, selectedImage));
+        dispatch(addPlace(title, selectedImage, selectedLocation));
         navigation.goBack();
     };
 
     const imageSelectedHandler = imagePath => {
         setSelectedImage(imagePath);
     };
+
+    const locationPickedHandler = useCallback(location => {
+        setSelectedLocation(location);
+    }, []);
 
     return (
         <ScrollView>
@@ -53,6 +58,8 @@ const NewPlace = ({ navigation }) => {
                     getImage={imageSelectedHandler}
                 />
                 <LocationPicker
+                    navigation={navigation}
+                    onLocationPicked={locationPickedHandler}
                 />
                 <Button
                     title="Save Place"

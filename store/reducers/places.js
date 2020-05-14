@@ -11,7 +11,10 @@ export default (state = initialState, action) => {
             const newPlace = new Place(
                 action.place.id.toString(),
                 action.place.title,
-                action.place.image
+                action.place.image,
+                action.place.address,
+                action.place.lat,
+                action.place.lng
             );
             return {
                 ...state,
@@ -23,7 +26,10 @@ export default (state = initialState, action) => {
                             new Place(
                                 pl.id.toString(),
                                 pl.title,
-                                pl.image
+                                pl.image,
+                                pl.address,
+                                pl.lat,
+                                pl.lng
                             )
                         )
             };
