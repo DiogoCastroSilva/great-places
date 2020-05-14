@@ -8,6 +8,8 @@ import {
     ScrollView,
     Button
 } from 'react-native';
+// Expo
+import * as Permissions from 'expo-permissions';
 // Redux
 import { useDispatch } from 'react-redux';
 
@@ -32,7 +34,21 @@ const NewPlace = ({ navigation }) => {
         setTitle(text);
     };
 
-    const savePlace = () => {
+    const verifyPermissions = async () => {
+        const permission = await Permissions.askAsync(Permissions.LOCATION);
+        if (permission.status !== 'granted') {
+            Alert.alert("Insufficient permissions!",
+                "You need to grant location permissions to use this app.",
+                [{ text: "Close" }]
+            );
+            return false;
+        }
+        return true;
+    };
+
+    const savePlace = async () => {
+        const permission = await verifyPermissions();
+        if (!permission) return;
         dispatch(addPlace(title, selectedImage, selectedLocation));
         navigation.goBack();
     };
